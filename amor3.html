@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Frases de Amor con Corazón</title>
+  <style>
+    body {
+      margin: 0;
+      background: #181124;
+      overflow: hidden;
+      font-family: 'Arial Black', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .love-container {
+      background: rgba(255,255,255,0.93);
+      border-radius: 28px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      width: 380px;
+      height: 330px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .heart-btn {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: transform 0.18s cubic-bezier(.7,1.7,.45,1.16);
+    }
+    .heart-btn:active {
+      transform: scale(1.13);
+    }
+    .heart {
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+    }
+    .frases-area {
+      width: 100%;
+      min-height: 150px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 12px 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .frase {
+      background: linear-gradient(90deg,#ff8ca0,#ff3e7a 90%);
+      color: white;
+      font-weight: bold;
+      padding: 7px 20px 7px 16px;
+      border-radius: 24px;
+      font-size: 1.05rem;
+      box-shadow: 0 2px 8px #ff3e7a22;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px) scale(0.94);
+      animation: fraseIn 0.44s cubic-bezier(.7,1.7,.45,1.16) forwards;
+    }
+    .frase.emoji::after {
+      content: " 💘";
+      font-size: 1.1em;
+      margin-left: 6px;
+    }
+    @keyframes fraseIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .love-title {
+      position: absolute;
+      top: 26px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 2.3rem;
+      color: #ff3e7a;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 0 18px #ff3e7a44, 0 0 4px white;
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+      opacity: 0.91;
+    }
+  </style>
+</head>
+<body>
+  <div class="love-container">
+    <div class="love-title">Love You</div>
+    <br><br><button class="heart-btn" id="heartBtn" aria-label="Corazón">
+      <svg class="heart" viewBox="0 0 64 64" fill="none">
+        <path d="M32 56s-18-13.6-18-26A10 10 0 0132 18a10 10 0 0118 12c0 12.4-18 26-18 26z"
+          fill="#ff3e7a" stroke="#e82b60" stroke-width="3"/>
+      </svg>
+    </button>
+    <div class="frases-area" id="frasesArea"></div>
+  </div>
+  <script>
+    // Frases lindas de amor
+    const frases = [
+      "Mi razón de sonreír 😍",
+      "Eres mi casualidad más bonita",
+      "Gracias por existir 💖",
+      "Mi mejor amiga ➰",
+      "Sin ti no soy nada",
+      "Te amo por siempre",
+      "Mi lugar favorito es a tu lado",
+      "Eres mi sueño hecho realidad",
+      "Tú y yo, juntos por siempre",
+      "Contigo todo es mejor",
+      "Mi persona favorita",
+      "Eres mi felicidad",
+      "Eres la luz de mis días",
+      "Te pienso a cada instante",
+      "Mi corazón es tuyo",
+      "Tú haces mi mundo especial"
+    ];
+
+    const frasesArea = document.getElementById('frasesArea');
+    const heartBtn = document.getElementById('heartBtn');
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function mostrarFrases() {
+      frasesArea.innerHTML = '';
+      let shuffled = shuffleArray([...frases]);
+      // Selecciona entre 4 y 7 frases aleatorias
+      let count = 4 + Math.floor(Math.random() * 4);
+      for (let i = 0; i < count; i++) {
+        let frase = shuffled[i];
+        let div = document.createElement('div');
+        div.className = 'frase' + (i === 0 ? ' emoji' : '');
+        div.textContent = frase;
+        frasesArea.appendChild(div);
+      }
+    }
+
+    // Lógica para mostrar frases al hacer clic al corazón
+    heartBtn.addEventListener('click', e => {
+      mostrarFrases();
+      // Efecto de latido para el corazón
+      heartBtn.style.transform = 'scale(1.16)';
+      setTimeout(() => {
+        heartBtn.style.transform = '';
+      }, 220);
+    });
+
+    // Opcional: mostrar frases la primera vez
+    //mostrarFrases();
+  </script>
+</body>
+</html>
